@@ -1,0 +1,27 @@
+
+services:
+  storage:
+    build:
+      context: ./storage
+    env_file:
+      - ./.environ/storage.env
+    container_name: storage
+    volumes:
+      - ./storage/src:/app/src
+    ports:
+      - 8000:8000  # Propagate changes to STORAGE_API_URL in environ/email.env
+    working_dir: /app/src
+    command: uv run uvicorn main:app --host 0.0.0.0 --port 8000
+
+  email:
+    build:
+      context: ./email
+    env_file:
+      - ./.environ/email.env
+    container_name: email
+    ports:
+      - 8001:8001
+    volumes:
+      - ./email/src:/app/src
+    working_dir: /app/src
+    command: uv run uvicorn main:app --host 0.0.0.0 --port 8001

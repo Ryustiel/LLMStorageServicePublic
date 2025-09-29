@@ -1,0 +1,15 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Local storage for the storage service
+storage/src/data/*
+
+# Virtual environments
+.venv
+.environ/*
+uv.lock
